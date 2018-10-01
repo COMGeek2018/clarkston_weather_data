@@ -1,0 +1,161 @@
+<html>
+<head>
+  <title>Clarkston Rain Data</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Clarkston Weather Data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+</nav>
+
+  <div id="myDiv"></div>
+  <div id="pressure"></div>
+  <div id="in_per_hour"></div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="TEST2.TXT"></script>
+<script>
+  console.log(text); //Prints out the data to the console for testing purposes
+
+  textSplit = text.split("\n"); //Splits our lines of data into indexes in an array named textSplit
+
+  //Arrays
+  var temp = [];
+  var humidity = [];
+  var pressure = [];
+  var time_per_tip = [];
+  var time_interval = []; //Finds the difference between the time-per-tip values
+  var in_per_hour = [];
+  var midt = []; //Middle Point of Time Interval
+  var EDT = []; //Time on Clock
+
+  const IN_PER_TIP = 0.01;
+
+  //Temperature
+  for (var i = 0; i < textSplit.length; i += 2) { //It's i += 2 because every other line is a blank line.
+    tempSplit = textSplit[i].split("  "); //There are two spaces separating each piece of data on a line, and we put these pieces of data in an array named tempSplit.
+    temp.push(tempSplit[0]); //The first element in tempSplit is the temperature.
+  }
+
+  //Humidity
+  for (var i = 0; i < textSplit.length; i += 2){
+    humiditySplit = textSplit[i].split("  ");
+    humidity.push(humiditySplit[1]);
+  }
+
+  //Pressure
+  for (var i = 0; i < textSplit.length; i += 2){
+    pressureSplit = textSplit[i].split("  ");
+    pressure.push(pressureSplit[2]);
+  }
+
+  // Time Per Tip
+  for (var i = 0; i < textSplit.length; i += 2){
+    timeSplit = textSplit[i].split("  ");
+    time_per_tip.push(timeSplit[3]);
+  }
+
+  //Time Interval - Finds the difference between the time-per-tip values
+  for (var i = 0; i < time_per_tip.length; i++){
+  	time_interval.push(time_per_tip[i+1] - time_per_tip[i]);
+  }
+
+  //Inches Per Hour
+  for (var i = 0; i < time_interval.length; i++){
+  	in_per_hour.push(3600 * IN_PER_TIP/ time_interval[i]);
+  }
+
+  //Middle Point of Time Interval
+  for (var i = 0; i < time_per_tip.length; i++){
+  	midt.push(time_per_tip[i+1]/2 + time_per_tip[i]/2);
+  }
+  for (var i = 0; i < midt.length; i++){
+  	EDT.push(convertToHHMM((midt[i]%86400)/3600));
+  }
+
+  //Converts Hours to Minutes
+  function convertToHHMM(info) {
+    var hrs = parseInt(Number(info)); //Converts the String to an integer
+    var min = Math.round((Number(info)-hrs) * 60);
+
+    minString = "" + min; //Converts the minute integer to a String so that its length can be taken and a "0" can be added if it's a time like 5:07, 8:09, 2:02, etc; so they don't show up like 5:7, 8:9, 2:2.
+
+    if (minString.length == 1) { //If the length of the minute is equal to 1 (in other words, if the minute is a 1-digit number)
+      minString = "0" + min; //add a zero.
+
+      return hrs + ':' + minString;
+    } else { //If not, don't add a zero.
+      return hrs + ':' + min;
+    }
+  }
+
+  /*Temperature and Humidity Graph Code*/
+  //Temperature Line
+  var temp_line = {
+    x: EDT,
+    y: temp,
+    type: 'scatter',
+    name: 'Temperature'
+  };
+
+  //Humidity Line
+  var humidity_line = {
+    x: EDT,
+    y: humidity,
+    type: 'scatter',
+    name: 'Humidity'
+  };
+
+  var temp_and_humidity_line_data = [temp_line, humidity_line]; //Array for the lines to be traced on the graph
+
+  var temp_and_humidity_layout = {
+    title:'Humidity and Temperature' //For the graph title
+  };
+
+  Plotly.newPlot('myDiv', temp_and_humidity_line_data, temp_and_humidity_layout); //Plots the graph using the supplied div, array with lines, and layout. The layout parameter is not needed.
+
+
+  /*Pressure Graph Code*/
+  //Pressure Line
+  var pressure_line = {
+    x: EDT,
+    y: pressure,
+    type: 'scatter',
+    name: 'Pressure'
+  };
+
+  var pressure_layout = {
+    title:'Pressure'
+  };
+
+  var pressure_line_data = [pressure_line];
+
+  Plotly.newPlot('pressure', pressure_line_data, pressure_layout);
+
+
+  //Inch-Per-Hour Graph Code
+  var in_per_hour_line = {
+    x: EDT,
+    y: in_per_hour,
+    type: 'scatter',
+    name:'Inches Per Hour'
+  };
+
+  var in_per_hour_layout = {
+    title:'Inches Per Hour'
+  };
+
+  var in_per_hour_line_data = [in_per_hour_line];
+
+  Plotly.newPlot('in_per_hour', in_per_hour_line_data, in_per_hour_layout);
+
+</script>
+</html>
