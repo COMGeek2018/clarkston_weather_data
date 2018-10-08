@@ -1,0 +1,79 @@
+<html>
+<head>
+  <title>About - Clarkston Rain Data</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+	  <a class="navbar-brand" href="#">
+	<!--<img src="/media/christophrrb/a170d5ab-5307-4112-98d8-59dbd1479c8c/home/christophrrb/CLACEC/CLACEC Logo.jpg" height="30px">-->CLACEC
+	  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="about.html">About<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+ </div>
+</nav>
+<div class="container">
+
+<!--
+	- Why We Did It
+	- How the Calculations are Done
+	- How the Tip is Collected
+	- Pictures
+-->
+
+	<h2>Overview</h2>
+	<p>
+		Clarkston's Computing and Enginnering Club has worked on a weather station to collect data from the Clarkston campus. The weather station is made from a rain
+		gauge that sends data to an Arduino that has weather sensors to detect temperature, pressure, and humidity.
+	</p>
+	<br><hr>
+
+	<h2>Parts of the Project</h2>
+	<p>
+    <div style="width:20%">
+    <!-- List group -->
+    <div class="list-group" id="myList" role="tablist">
+      <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab">Home</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Profile</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="#messages" role="tab">Messages</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Settings</a>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="home" role="tabpanel">...</div>
+      <div class="tab-pane" id="profile" role="tabpanel">...</div>
+      <div class="tab-pane" id="messages" role="tabpanel">...</div>
+      <div class="tab-pane" id="settings" role="tabpanel">...</div>
+    </div>
+  </div>
+	</p>
+
+	<br><hr>
+
+	<h2>How the Data Is Collected</h2>
+
+	<br><hr>
+
+	<h2>Calculations</h2>
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+	$('#myList a').on('click', function (e) {
+		  e.preventDefault()
+	  $(this).tab('show')
+	})
+</script>
+</html>
