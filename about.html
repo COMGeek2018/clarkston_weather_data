@@ -3,6 +3,11 @@
   <title>About - Clarkston Rain Data</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <style>
+    img {
+      height: 300px;
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
@@ -37,25 +42,51 @@
 	<br><hr>
 
 	<h2>Parts of the Project</h2>
-	<p>
-    <div style="width:20%">
-    <!-- List group -->
-    <div class="list-group" id="myList" role="tablist">
-      <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab">Home</a>
-      <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Profile</a>
-      <a class="list-group-item list-group-item-action" data-toggle="list" href="#messages" role="tab">Messages</a>
-      <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Settings</a>
-    </div>
+  <br>
+	<div class="container" id="parts_container">
+    <div class="row">
+    <div class="col-md-3">
+      <!-- List group -->
+      <div class="list-group" id="myList" role="tablist">
+        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab">General Setup</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Arduino Setup</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#messages" role="tab">Rain Tip</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Weather Data Sensor</a>
+      </div>
+  </div>
 
+  <div class="col-md-9">
     <!-- Tab panes -->
     <div class="tab-content">
-      <div class="tab-pane active" id="home" role="tabpanel">...</div>
-      <div class="tab-pane" id="profile" role="tabpanel">...</div>
-      <div class="tab-pane" id="messages" role="tabpanel">...</div>
-      <div class="tab-pane" id="settings" role="tabpanel">...</div>
+      <div class="tab-pane active" id="home" role="tabpanel">
+        <img src="Arduino%20photos/rain_gauge.jpg" alt="Rain Gauge" style=" padding-top: 200px;">
+      </div>
+      <div class="tab-pane" id="profile" role="tabpanel">
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <img src="Arduino%20photos/arduino_box.jpg" alt="Arduino Setup">
+              <br><br>
+              <img src="Arduino%20photos/inside_the_arduino_box.jpg" alt="Inside the Arduino Box">
+            </div>
+            <div class="col-md">
+              <p>The Arduino is in a container to prevent rain damage. Attached to it is a shield for an SD card and batteries. 
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane" id="messages" role="tabpanel">
+        <img src="Arduino%20photos/rain_tip.jpg" alt="Rain Tip">
+      </div>
+      <div class="tab-pane" id="settings" role="tabpanel">
+        <img src="Arduino%20photos/weather_data_sensor.jpg" alt="Weather Data Sensor">
+      </div>
     </div>
   </div>
-	</p>
+  </div>
+</div>
+
 
 	<br><hr>
 
