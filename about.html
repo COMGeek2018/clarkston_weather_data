@@ -11,7 +11,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
-	  <a class="navbar-brand" href="#">
+	  <a class="navbar-brand" href="raintest.html">
 	<!--<img src="/media/christophrrb/a170d5ab-5307-4112-98d8-59dbd1479c8c/home/christophrrb/CLACEC/CLACEC Logo.jpg" height="30px">-->CLACEC
 	  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,17 +70,35 @@
               <img src="Arduino%20photos/inside_the_arduino_box.jpg" alt="Inside the Arduino Box">
             </div>
             <div class="col-md">
-              <p>The Arduino is in a container to prevent rain damage. Attached to it is a shield for an SD card and batteries. 
+              <p>The Arduino is in a container to prevent rain damage. Attached to it is a shield for an SD card and batteries.</p>
             </div>
           </div>
         </div>
 
       </div>
       <div class="tab-pane" id="messages" role="tabpanel">
-        <img src="Arduino%20photos/rain_tip.jpg" alt="Rain Tip">
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <img src="Arduino%20photos/rain_tip.jpg" alt="Rain Tip">
+            </div>
+            <div class="col-md">
+              <p>The magnet changes position, records the time, and every tip is 100 mL of rain.</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane" id="settings" role="tabpanel">
-        <img src="Arduino%20photos/weather_data_sensor.jpg" alt="Weather Data Sensor">
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <img src="Arduino%20photos/weather_data_sensor.jpg" alt="Weather Data Sensor">
+            </div>
+            <div class="col-md">
+              <p>Sensor to calculate temperature, air pressure, and relative humidity.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -91,10 +109,35 @@
 	<br><hr>
 
 	<h2>How the Data Is Collected</h2>
+    <p>The data from the sensor (including temperature, pressure, and humidity) and time of the rain tip are stored on the SD card.
+      The data is stored in a text file on the card that is read by JavaScript and seperated line by line. After each line has been put into an array,
+    each line is split into another array with temperature, air pressure, humidity, and time.
 
-	<br><hr>
+    <br><br>
+    Example Text File
+
+    <div style="background-color: lightgray; font-family: Courier New;">
+        let text = <br>
+        `27.91  83.28  99138.10  1532118569 <br>
+        27.72  83.54  99137.46  1532118629 <br>
+        ... <br>
+        22.44  100.00  99008.11  1532166127 <br>
+        22.43  100.00  99023.25  1532166187 <br>
+        `;
+    </div>
+
+    <br>
+
+    <i>From Left to Right: Temperature (°C), Humidity, Air Pressure (Pa), Unix Time<i>
+
+    </p>
+	<hr>
 
 	<h2>Calculations</h2>
+  <p>
+    To calculate we first converted the Unix Time to days by dividing that time by 86,400 and taking the remainder to find how many seconds had passed in that day
+    and divided it by 3,600 to find the hour of the tip. The hour was now in decimal form, so we converted the decimal part of the hour to minutes.
+  </p>
 
 </div>
 </body>
